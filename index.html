@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseHire | A Volhard Consulting Solution</title>
+    <meta name="description" content="PulseHire — Smart, fair, data-driven hiring built on Microsoft Power Platform. A Volhard Consulting solution.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Color Variables - Updated to match illustrations */
+        :root {
+            /* Primary Colors */
+            --ph-primary: #FF9F43;
+            --ph-primary-dark: #E88B2F;
+            --ph-primary-light: #FFB366;
+
+            /* Secondary Colors */
+            --ph-secondary: #4A90E2;
+            --ph-secondary-dark: #3A7BC8;
+            --ph-secondary-light: #6AA5EC;
+
+            /* Accent Colors */
+            --ph-accent-green: #4ECB71;
+            --ph-accent-pink: #FF6FB5;
+            --ph-accent-coral: #FF6B6B;
+            --ph-accent-yellow: #FFC837;
+
+            /* Neutrals */
+            --ph-bg: #F0F7FF;
+            --ph-surface: #FFFEF7;
+            --ph-surface-alt: #FFE8D1;
+            --ph-text: #1A1A2E;
+            --ph-text-muted: #5A5A6E;
+            --ph-outline: #1A1A2E;
+
+            /* Navy for depth */
+            --ph-navy: #2C3E88;
+            --ph-navy-dark: #1E2B5F;
+
+            /* Legacy compatibility */
+            --ph-red: #FF6B6B;
+            --ph-white: #FFFEF7;
+            --ph-aqua: #4ECB71;
+            --ph-blue: #4A90E2;
+
+            /* Shadows & Effects */
+            --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.08);
+            --shadow-md: 0 4px 16px rgba(26, 26, 46, 0.12);
+            --shadow-lg: 0 8px 32px rgba(26, 26, 46, 0.16);
+            --shadow-glow: 0 0 24px rgba(255, 159, 67, 0.3);
+
+            /* Spacing System */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 80px;
+
+            /* Border Radius - Increased for friendlier feel */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+
+            /* Typography */
+            --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ph-bg);
+            color: var(--ph-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--ph-text);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 254, 247, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: var(--spacing-md) 0;
+            border-bottom: 3px solid var(--ph-outline);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ph-navy);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nav-brand-primary {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ph-navy);
+            line-height: 1;
+        }
+
+        .nav-brand-tagline {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--ph-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--ph-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--ph-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--ph-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Section Spacing */
+        section {
+            padding: var(--spacing-3xl) 0;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #FF9F43 0%, #4A90E2 50%, #4ECB71 100%);
+            padding-top: 100px;
+            padding-bottom: var(--spacing-3xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 203, 55, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            right: -200px;
+            transform: translateY(-50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .logo-badge {
+            width: 120px;
+            height: 120px;
+            background: var(--ph-surface);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            border: 4px solid var(--ph-outline);
+            color: var(--ph-primary);
+            box-shadow: 0 6px 0 var(--ph-outline), var(--shadow-md);
+            font-family: var(--font-heading);
+            padding: var(--spacing-sm);
+        }
+
+        .logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-sm);
+            color: white;
+            text-shadow: 2px 2px 0 var(--ph-outline);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtext {
+            font-size: 1.25rem;
+            color: white;
+            line-height: 1.7;
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid var(--ph-outline);
+            cursor: pointer;
+            font-family: var(--font-heading);
+            position: relative;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ph-primary) 0%, var(--ph-primary-light) 100%);
+            color: white;
+            box-shadow: 0 4px 0 var(--ph-outline), var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 0 var(--ph-outline), 0 0 32px rgba(255, 159, 67, 0.5), var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--ph-navy);
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 4px 0 var(--ph-outline);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ph-surface);
+            box-shadow: 0 6px 0 var(--ph-outline), var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            position: relative;
+            z-index: 2;
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 8px 0 var(--ph-outline), var(--shadow-lg);
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            background: var(--ph-surface);
+        }
+
+        .feature-section:nth-child(even) {
+            background: var(--ph-bg);
+        }
+
+        .feature-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+        }
+
+        .feature-content.reverse {
+            direction: rtl;
+        }
+
+        .feature-content.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-image {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 6px 0 var(--ph-outline), var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .feature-image:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 0 var(--ph-outline), var(--shadow-lg);
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+        }
+
+        .feature-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--ph-navy);
+            line-height: 1.2;
+        }
+
+        .feature-text p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--ph-text-muted);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 1rem;
+            color: var(--ph-text);
+            font-weight: 500;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--ph-accent-green);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: linear-gradient(135deg, var(--ph-secondary) 0%, var(--ph-navy) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 159, 67, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: rgba(255, 254, 247, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 3px solid var(--ph-outline);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 0 var(--ph-outline), var(--shadow-md);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 0 var(--ph-outline), var(--shadow-lg);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--ph-accent-yellow), var(--ph-primary));
+            border-radius: var(--radius-md);
+            border: 3px solid var(--ph-outline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            font-size: 2rem;
+            box-shadow: 0 4px 0 var(--ph-outline);
+        }
+
+        .glass-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--ph-navy);
+            font-family: var(--font-heading);
+        }
+
+        .glass-card p {
+            color: var(--ph-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            background: var(--ph-surface);
+        }
+
+        .testimonial-card {
+            background: white;
+            border: 3px solid var(--ph-outline);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-2xl);
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 0 var(--ph-outline), var(--shadow-lg);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: var(--spacing-lg);
+            left: var(--spacing-lg);
+            font-size: 4rem;
+            font-family: Georgia, serif;
+            color: var(--ph-primary);
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--ph-text);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            color: var(--ph-secondary);
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF9F43 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 203, 55, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            color: white;
+            text-shadow: 2px 2px 0 var(--ph-outline);
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xl);
+            color: white;
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--ph-navy);
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 4px 0 var(--ph-outline), var(--shadow-md);
+        }
+
+        .btn-white:hover {
+            box-shadow: 0 6px 0 var(--ph-outline), 0 0 32px rgba(255, 255, 255, 0.8), var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .btn-white:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+            box-shadow: 0 4px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline-white:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 0 rgba(255, 255, 255, 0.6), var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-white:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ph-navy);
+            padding: var(--spacing-2xl) 0 var(--spacing-lg);
+            border-top: 4px solid var(--ph-outline);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--ph-primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--ph-accent-green);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--spacing-xl) 0;
+            }
+
+            .nav-logo img {
+                height: 32px;
+            }
+
+            .nav-brand-primary {
+                font-size: 1rem;
+            }
+
+            .nav-brand-tagline {
+                font-size: 0.65rem;
+            }
+
+            .nav-links {
+                gap: var(--spacing-sm);
+                font-size: 0.875rem;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtext {
+                font-size: 1.125rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .feature-content,
+            .feature-content.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .feature-text h2 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2,
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtext {
+                font-size: 1rem;
+            }
+
+            .feature-text h2 {
+                font-size: 1.75rem;
+            }
+
+            .section-header h2,
+            .cta-content h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="PulseHire Logo">
+                <span class="nav-logo-text">
+                    <span class="nav-brand-primary">PulseHire</span>
+                    <span class="nav-brand-tagline">A Volhard Consulting Solution</span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://volhardconsulting.com">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="logo-badge">
+                        <img src="logo.png" alt="PulseHire Logo">
+                    </div>
+                    <h1>Smarter hiring. Fairer outcomes.</h1>
+                    <p class="hero-subtext">PulseHire helps HR teams identify the best candidates with data-driven scoring, built on Microsoft Power Platform. A Volhard Consulting solution.</p>
+                    <div class="hero-buttons">
+                        <a href="#demo" class="btn btn-primary">Try the Demo</a>
+                        <a href="#contact" class="btn btn-secondary">Book a Consultation</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="1.png" alt="PulseHire Hero Illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 1: Score Smarter -->
+    <section class="feature-section" id="features">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-image">
+                    <img src="2.png" alt="Objective Candidate Scoring">
+                </div>
+                <div class="feature-text">
+                    <h2>Objective candidate scoring.</h2>
+                    <p>Replace bias with metrics. PulseHire uses configurable scoring models to rank candidates fairly and consistently.</p>
+                    <ul class="feature-list">
+                        <li>Define custom scoring criteria</li>
+                        <li>Integrate with Microsoft Forms or Excel inputs</li>
+                        <li>Visualize top performers instantly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 2: Automate the Process -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-content reverse">
+                <div class="feature-image">
+                    <img src="3.png" alt="Automated Shortlisting">
+                </div>
+                <div class="feature-text">
+                    <h2>Automated shortlisting.</h2>
+                    <p>PulseHire connects to Power Automate to instantly move candidates between review stages and notify teams when top talent is identified.</p>
+                    <a href="#demo" class="btn btn-primary">See Workflow in Action</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section 3: Data That Matters -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-image">
+                    <img src="4.png" alt="Data-Driven Insights">
+                </div>
+                <div class="feature-text">
+                    <h2>Data that drives better hiring.</h2>
+                    <p>From scoring trends to candidate demographics, PulseHire gives HR teams insight into what's working — and what's not — without leaving the Microsoft ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose PulseHire -->
+    <section class="why-choose">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose PulseHire</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="glass-card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Built on Microsoft Power Platform</h3>
+                    <p>Secure, familiar, and scalable. Integrate seamlessly with your existing Microsoft ecosystem.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Customizable Scoring Models</h3>
+                    <p>Adapt to any job role or workflow. Configure scoring criteria that match your unique hiring needs.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Designed for Clarity</h3>
+                    <p>Clean visuals, minimal bias, actionable insight. Make confident hiring decisions backed by data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"PulseHire helped us streamline candidate evaluation and reduce bias across departments."</p>
+                <p class="testimonial-author">— HR Lead, Mid-Size Tech Firm</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Demo Section -->
+    <section class="cta-section" id="demo">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Turn hiring into a science.</h2>
+                <p>See how PulseHire can improve your decision-making.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-white">Launch Demo</a>
+                    <a href="#contact" class="btn btn-outline-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>PulseHire</h3>
+                    <p>Smart, fair, data-driven hiring built on Microsoft Power Platform. A Volhard Consulting solution.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="brand.html">Brand</a></li>
+                        <li><a href="index.html">Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Volhard Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
