@@ -823,6 +823,239 @@
                 font-size: 1.75rem;
             }
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--ph-surface);
+            border-radius: var(--radius-lg);
+            border: 3px solid var(--ph-outline);
+            box-shadow: 0 20px 60px rgba(26, 26, 46, 0.4);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--ph-primary) 0%, var(--ph-primary-light) 100%);
+            padding: var(--spacing-lg);
+            border-bottom: 3px solid var(--ph-outline);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .modal-header h2 {
+            color: white;
+            font-size: 1.75rem;
+            font-family: var(--font-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background: white;
+            border: 3px solid var(--ph-outline);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ph-navy);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        .modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 var(--ph-outline);
+            background: var(--ph-accent-coral);
+            color: white;
+        }
+
+        .modal-body {
+            padding: var(--spacing-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--ph-navy);
+            margin-bottom: var(--spacing-xs);
+            font-family: var(--font-heading);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 3px solid var(--ph-outline);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--ph-primary);
+            box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--ph-primary) 0%, var(--ph-primary-light) 100%);
+            color: white;
+            border: 3px solid var(--ph-outline);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 var(--ph-outline);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 var(--ph-outline), 0 0 32px rgba(255, 159, 67, 0.5);
+        }
+
+        .form-submit:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--ph-outline);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .form-success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--ph-accent-green);
+            border-radius: 50%;
+            border: 4px solid var(--ph-outline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 2.5rem;
+            box-shadow: 0 4px 0 var(--ph-outline);
+        }
+
+        .form-success h3 {
+            color: var(--ph-navy);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .form-success p {
+            color: var(--ph-text-muted);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-header {
+                padding: var(--spacing-md);
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
+                padding: var(--spacing-md);
+            }
+
+            .modal-close {
+                top: var(--spacing-sm);
+                right: var(--spacing-sm);
+                width: 36px;
+                height: 36px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -856,8 +1089,8 @@
                     <h1>Smarter hiring. Fairer outcomes.</h1>
                     <p class="hero-subtext">PulseHire helps HR teams identify the best candidates with data-driven scoring, built on Microsoft Power Platform. A Volhard Consulting solution.</p>
                     <div class="hero-buttons">
-                        <a href="https://thatoseluku.github.io/PulseHireSite/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Try the Demo</a>
-                        <a href="#contact" class="btn btn-secondary">Book a Consultation</a>
+                        <a href="https://thatoseluku.github.io/PulseHire/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Try the Demo</a>
+                        <button class="btn btn-secondary" onclick="openContactModal()">Book a Consultation</button>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -897,7 +1130,7 @@
                 <div class="feature-text">
                     <h2>Automated shortlisting.</h2>
                     <p>PulseHire connects to Power Automate to instantly move candidates between review stages and notify teams when top talent is identified.</p>
-                    <a href="https://thatoseluku.github.io/PulseHireSite/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">See Workflow in Action</a>
+                    <a href="https://thatoseluku.github.io/PulseHire/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">See Workflow in Action</a>
                 </div>
             </div>
         </div>
@@ -965,7 +1198,7 @@
                 <p>See how PulseHire can improve your decision-making.</p>
                 <div class="cta-buttons">
                     <a href="https://thatoseluku.github.io/PulseHire/" class="btn btn-white" target="_blank" rel="noopener noreferrer">Launch Demo</a>
-                    <a href="#contact" class="btn btn-outline-white">Contact Us</a>
+                    <button class="btn btn-outline-white" onclick="openContactModal()">Contact Us</button>
                 </div>
             </div>
         </div>
@@ -1009,7 +1242,133 @@
         </div>
     </footer>
 
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeContactModal()" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2>Book a Consultation</h2>
+                <p>Let's discuss how PulseHire can transform your hiring process</p>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm" class="contact-form-inner">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company" placeholder="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">I'm interested in *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Select an option...</option>
+                            <option value="demo">Scheduling a demo</option>
+                            <option value="pricing">Pricing information</option>
+                            <option value="implementation">Implementation details</option>
+                            <option value="custom">Custom solution</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us about your hiring challenges..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+                <div id="formSuccess" class="form-success">
+                    <div class="form-success-icon">✓</div>
+                    <h3>Thank You!</h3>
+                    <p>We've received your message and will get back to you within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Modal Functions
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Reset form after a delay
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').style.display = 'block';
+                document.getElementById('formSuccess').classList.remove('active');
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeContactModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeContactModal();
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('.form-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Create mailto link
+            const subject = encodeURIComponent(`PulseHire Consultation Request - ${data.name}`);
+            const body = encodeURIComponent(
+                `Name: ${data.name}\n` +
+                `Email: ${data.email}\n` +
+                `Company: ${data.company || 'N/A'}\n` +
+                `Phone: ${data.phone || 'N/A'}\n` +
+                `Interest: ${data.interest}\n\n` +
+                `Message:\n${data.message}`
+            );
+
+            // Open default email client
+            window.location.href = `mailto:contact@volhardconsulting.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                this.style.display = 'none';
+                document.getElementById('formSuccess').classList.add('active');
+
+                // Auto-close after 3 seconds
+                setTimeout(() => {
+                    closeContactModal();
+                }, 3000);
+            }, 1000);
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
