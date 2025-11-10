@@ -412,6 +412,13 @@
             border-radius: var(--radius-sm);
         }
 
+        .feature-video video {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+            display: block;
+        }
+
         .feature-text h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
@@ -1140,8 +1147,11 @@
     <section class="feature-section">
         <div class="container">
             <div class="feature-content">
-                <div class="feature-image">
-                    <img src="assets/4.png" alt="Data-Driven Insights">
+                <div class="feature-image feature-video">
+                    <video id="explainerVideo" muted loop playsinline>
+                        <source src="assets/explainer.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="feature-text">
                     <h2>Data that drives better hiring.</h2>
@@ -1401,6 +1411,27 @@
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
+
+        // Video autoplay on scroll
+        const video = document.getElementById('explainerVideo');
+        if (video) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(error => {
+                            // Autoplay was prevented, user interaction required
+                            console.log('Autoplay prevented:', error);
+                        });
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            videoObserver.observe(video);
+        }
     </script>
 </body>
 </html>
