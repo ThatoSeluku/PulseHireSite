@@ -406,6 +406,18 @@
             box-shadow: 0 10px 0 var(--ph-outline), var(--shadow-lg);
         }
 
+        .feature-video {
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .feature-video:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         .feature-image img {
             width: 100%;
             height: auto;
@@ -417,6 +429,11 @@
             height: auto;
             border-radius: var(--radius-sm);
             display: block;
+        }
+
+        .feature-video > div {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
         }
 
         .feature-text h2 {
@@ -741,7 +758,12 @@
             }
 
             .nav-logo img {
-                height: 32px;
+                height: 64px;
+            }
+
+            .logo-badge {
+                width: 240px;
+                height: 240px;
             }
 
             .nav-brand-primary {
@@ -1148,10 +1170,9 @@
         <div class="container">
             <div class="feature-content">
                 <div class="feature-image feature-video">
-                    <video id="explainerVideo" muted loop playsinline>
-                        <source src="assets/explainer.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <div style="padding:56.25% 0 0 0;position:relative;">
+                        <iframe id="explainerVideo" src="https://player.vimeo.com/video/1135457168?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;loop=1&amp;autoplay=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:var(--radius-sm);" title="Explainer"></iframe>
+                    </div>
                 </div>
                 <div class="feature-text">
                     <h2>Data that drives better hiring.</h2>
@@ -1412,25 +1433,33 @@
             observer.observe(section);
         });
 
-        // Video autoplay on scroll
-        const video = document.getElementById('explainerVideo');
-        if (video) {
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        video.play().catch(error => {
-                            // Autoplay was prevented, user interaction required
-                            console.log('Autoplay prevented:', error);
-                        });
-                    } else {
-                        video.pause();
-                    }
-                });
-            }, {
-                threshold: 0.5
-            });
+        // Video autoplay on scroll - Vimeo iframe
+        const videoIframe = document.getElementById('explainerVideo');
+        if (videoIframe) {
+            // Load Vimeo Player API
+            const script = document.createElement('script');
+            script.src = 'https://player.vimeo.com/api/player.js';
+            document.head.appendChild(script);
 
-            videoObserver.observe(video);
+            script.onload = function() {
+                const player = new Vimeo.Player(videoIframe);
+
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            player.play().catch(error => {
+                                console.log('Autoplay prevented:', error);
+                            });
+                        } else {
+                            player.pause();
+                        }
+                    });
+                }, {
+                    threshold: 0.5
+                });
+
+                videoObserver.observe(videoIframe);
+            };
         }
     </script>
 </body>
