@@ -1364,7 +1364,7 @@
         });
 
         // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const submitBtn = this.querySelector('.form-submit');
@@ -1373,34 +1373,43 @@
 
             // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
 
-            // Create mailto link
-            const subject = encodeURIComponent(`PulseHire Consultation Request - ${data.name}`);
-            const body = encodeURIComponent(
-                `Name: ${data.name}\n` +
-                `Email: ${data.email}\n` +
-                `Company: ${data.company || 'N/A'}\n` +
-                `Phone: ${data.phone || 'N/A'}\n` +
-                `Interest: ${data.interest}\n\n` +
-                `Message:\n${data.message}`
-            );
+            // Add Web3Forms access key (you'll need to replace this with your own from web3forms.com)
+            formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY_HERE');
+            formData.append('subject', `PulseHire Consultation Request - ${formData.get('name')}`);
+            formData.append('from_name', 'PulseHire Contact Form');
 
-            // Open default email client
-            window.location.href = `mailto:contact@volhardconsulting.com?subject=${subject}&body=${body}`;
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
 
-            // Show success message
-            setTimeout(() => {
+                const result = await response.json();
+
+                if (result.success) {
+                    // Show success message
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                    this.style.display = 'none';
+                    document.getElementById('formSuccess').classList.add('active');
+
+                    // Reset form
+                    this.reset();
+
+                    // Auto-close after 3 seconds
+                    setTimeout(() => {
+                        closeContactModal();
+                    }, 3000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again or contact us directly at contact@volhardconsulting.com');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
-                this.style.display = 'none';
-                document.getElementById('formSuccess').classList.add('active');
-
-                // Auto-close after 3 seconds
-                setTimeout(() => {
-                    closeContactModal();
-                }, 3000);
-            }, 1000);
+            }
         });
 
         // Smooth scrolling for anchor links
